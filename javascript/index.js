@@ -1,4 +1,7 @@
+import { Chronometer } from "./chronometer.js";
+
 const chronometer = new Chronometer();
+console.log(chronometer);
 
 // get the buttons:
 const btnLeft = document.getElementById('btnLeft');
@@ -14,15 +17,20 @@ let milUni = document.getElementById('milUni');
 let splits = document.getElementById('splits');
 
 function printTime() {
-  // ... your code goes here
+  printMinutes()
+  printSeconds()
 }
 
 function printMinutes() {
-  // ... your code goes here
+  let minutes = chronometer.twoDigitsNumber(chronometer.getMinutes());
+	minDec.innerHTML = minutes[0];
+	minUni.innerHTML = minutes[1];
 }
 
 function printSeconds() {
-  // ... your code goes here
+  let seconds = chronometer.twoDigitsNumber(chronometer.getSeconds());
+	secDec.innerHTML = seconds[0];
+	secUni.innerHTML = seconds[1];
 }
 
 // ==> BONUS
@@ -56,10 +64,37 @@ function setResetBtn() {
 
 // Start/Stop Button
 btnLeft.addEventListener('click', () => {
-  // ... your code goes here
+  if (btnLeft.className === "btn start") {
+    btnRight.textContent = "RESET";
+    btnRight.className = "btn reset";
+    btnLeft.textContent = "START";
+    btnLeft.className = "btn start";
+    chronometer.startClick();
+  } else {
+    btnRight.textContent = "SPLIT";
+    btnRight.className = "btn split";
+    btnLeft.textContent = "STOP";
+    btnLeft.className = "btn stop;"
+    chronometer.stopClick();
+  }
 });
 
 // Reset/Split Button
-btnRight.addEventListener('click', () => {
-  // ... your code goes here
+btnRight.addEventListener('click', () => { //Quand on clique sur le bouton droit, si la classe est en button reset
+  if (btnRight.className === "btn reset") {
+    btnRight.textContent = "RESET";
+    btnRight.className = "btn reset";
+    btnLeft.textContent = "START";
+    btnLeft.className = "btn start";
+    chronometer.startClick();
+  } else {
+    btnRight.textContent = "SPLIT";
+    btnRight.className = "btn split";      //   <<<< Il se passe ça
+    btnLeft.textContent = "STOP";
+    btnLeft.className = "btn stop;"
+
+    chronometer.stopClick();
+  }
 });
+
+// I don't get this lab at all so I'm sorry I will review everything this weekend...
